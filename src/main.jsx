@@ -3,15 +3,16 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Layout } from "./pages";
+import { Header, Home } from "./components";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <Layout header={<Header/>} />,
     children: [
       {
         path: "/",
-        element: <div>home</div>,
+        element: <Home/>,
       },
     ],
   },

@@ -1,13 +1,16 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { Header } from "../components";
 
-export default function Layout() {
+
+export default function Layout({ header, footer }) {
   return (
-    <div>
-      <Header />
-      <div>
-        <Outlet/>
+    <div className="grid grid-cols-1 auto-rows-auto min-h-screen">
+      <div className="row-span-1 col-span-1 ">{header}</div>
+     
+        <Outlet />
+     
+      <div className="row-span-1 col-span-1">
+        {footer}
       </div>
     </div>
   );
