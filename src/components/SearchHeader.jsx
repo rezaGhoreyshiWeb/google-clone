@@ -11,9 +11,9 @@ import GoogleLogo from "../assets/Google-logo.png";
 import SearchHeaderOption from "./SearchHeaderOption";
 
 export default function SearchHeader() {
-    const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [inputValue, setInputValue] = useState(searchParams.get('term'));
+  const [inputValue, setInputValue] = useState(searchParams.get("term"));
 
   function handleInput(e) {
     setInputValue(e.target.value);
