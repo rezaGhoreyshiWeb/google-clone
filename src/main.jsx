@@ -3,7 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Layout } from "./pages";
-import { Footer, Header, Home, Search } from "./components";
+import { Footer, Header, Home, Pagination, SearchHeader } from "./components";
+import SearchResult from "./components/SearchResult";
 
 
 const router = createBrowserRouter([
@@ -19,7 +20,13 @@ const router = createBrowserRouter([
   },
   {
     path:'/search',
-    element: <Search/>,
+    element: <Layout header={<SearchHeader/>}  footer={<Pagination/>}/>,
+    children: [
+      {
+        path: '/search',
+        element: <SearchResult/>
+      }
+    ]
     
   }
 ]);
