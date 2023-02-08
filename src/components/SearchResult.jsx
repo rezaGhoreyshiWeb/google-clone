@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 
 export default function SearchResult() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchResult, setSearchResult] = useState([]);
+  const [searchResult, setSearchResult] = useState({});
   const term = searchParams.get("term");
   const searchType = searchParams.get("searchType");
   const search = async function () {
@@ -14,11 +14,26 @@ export default function SearchResult() {
     setSearchResult(result);
   };
 console.log(searchResult)
-  useEffect(() => {
-    search();
-  }, []);
-  return <div>SearchResult</div>;
+
+
+//   useEffect(() => {
+//     search();
+//   }, []);
+
+
+  return (
+    <main >
+      <div className="w-full max-auto px-3 sm:pl-[5%] md:pl-[14%] lg:pl-52">
+        <p className="text-gray-600 text-sm mb-5 mt-3">
+          About {searchResult?.searchInformation?.formattedTotalResults} results
+          ({searchResult?.searchInformation?.formattedSearchTime}) seconds
+        </p>
+      </div>
+    </main>
+  );
 }
+
+
 
 async function getDataFromGoogle(term, searchType) {
   const data = await fetch(
