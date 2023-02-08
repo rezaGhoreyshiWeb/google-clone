@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   MagnifyingGlassIcon,
   MicrophoneIcon,
@@ -8,13 +8,12 @@ import {
 import User from "./User";
 
 import GoogleLogo from "../assets/Google-logo.png";
+import SearchHeaderOption from "./SearchHeaderOption";
 
-export default function SearchHeader({
-  inputValueFromParams,
-  setSearchParams,
-}) {
+export default function SearchHeader() {
+    const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [inputValue, setInputValue] = useState(inputValueFromParams);
+  const [inputValue, setInputValue] = useState(searchParams.get('term'));
 
   function handleInput(e) {
     setInputValue(e.target.value);
@@ -70,6 +69,7 @@ export default function SearchHeader({
         </form>
         <User className="ml-auto hidden md:inline-flex" />
       </div>
+      <SearchHeaderOption />
     </header>
   );
 }
