@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-
-
-
+import Parser from "html-react-parser";
 
 export default function SearchResult() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -13,27 +11,39 @@ export default function SearchResult() {
     const result = await getDataFromGoogle(term, searchType);
     setSearchResult(result);
   };
-console.log(searchResult)
+  console.log(searchResult);
 
-
-//   useEffect(() => {
-//     search();
-//   }, []);
-
+    useEffect(() => {
+      search();
+    }, []);
 
   return (
-    <main >
+    <main>
       <div className="w-full max-auto px-3 sm:pl-[5%] md:pl-[14%] lg:pl-52">
         <p className="text-gray-600 text-sm mb-5 mt-3">
           About {searchResult?.searchInformation?.formattedTotalResults} results
           ({searchResult?.searchInformation?.formattedSearchTime}) seconds
         </p>
+        {searchResult?.items?.map((result) => {
+          return (
+            <div key={result.key} className="max-w-xl mb-8">
+              <div className="group ">
+                <a className="text-sm truncate " href={result.link} target="_blank" rel="noopener noreferrer">
+                  {result.formattedUrl}
+                </a>
+                <a className="group-hover:underline decoration-blue-800" href={result.link} target="_blank" rel="noopener noreferrer">
+                  <h2 className="truncate text-xl font-medium text-blue-800 ">{result.title}</h2>
+                </a>
+
+              </div>
+              <p className="text-gray-600 ">{Parser(result.htmlSnippet)}</p>
+            </div>
+          );
+        })}
       </div>
     </main>
   );
 }
-
-
 
 async function getDataFromGoogle(term, searchType) {
   const data = await fetch(
