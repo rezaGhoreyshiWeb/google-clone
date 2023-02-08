@@ -7,25 +7,25 @@ export default function Home() {
   const [inputValue, setInputValue] = useState("");
   const navigate = useNavigate();
 
-
   function handleInput(e) {
     setInputValue(e.target.value);
   }
 
-
   function goSearch(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!inputValue.trim()) {
       return;
     }
 
-    navigate(`/search?term=${inputValue.trim()}`);
-
+    navigate(`/search?term=${inputValue.trim()}&searchType=${""}`);
   }
   return (
     <div className="row-span-4 col-span-1  ">
-      <form onSubmit={goSearch} className="flex  flex-col  items-center justify-center h-full   space-y-4 ">
+      <form
+        onSubmit={goSearch}
+        className="flex  flex-col  items-center justify-center h-full   space-y-4 "
+      >
         <img
           className="object-cover "
           src={GoogleLogo}
