@@ -4,6 +4,7 @@ import Parser from "html-react-parser";
 import mockData from "./mock";
 import ImageResults from "./ImageResults";
 import SearchMock from "./SearchMock";
+import SearchImageMock from "./SearchImageMock";
 
 export default function SearchResult() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,13 +21,20 @@ export default function SearchResult() {
     search();
   }, [term, startIndex, searchType]);
 
+  if(searchType === 'image' && !searchResult) {
+    return <SearchImageMock/>
+  }
+  
   if (searchType === "image") {
     return <ImageResults searchResult={searchResult} />;
   }
 
+
   if (searchType === "" && !searchResult) {
     return <SearchMock />;
   }
+
+
   return (
     <div className="row-start-2  w-full max-auto px-3 sm:pl-[5%] md:pl-[14%] lg:pl-52  h-full">
       <>
