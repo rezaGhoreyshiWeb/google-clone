@@ -9,6 +9,7 @@ export default function ImageResults({ searchResult }) {
             <div className="group">
               <a href={result.image.contextLink}>
                 <img
+                loading="lazy"
                   className="group-hover:shadow-xl w-full h-60 object-contain"
                   src={result.link}
                   alt={result.title}
