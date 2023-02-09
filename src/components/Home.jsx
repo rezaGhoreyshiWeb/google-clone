@@ -20,6 +20,17 @@ export default function Home() {
 
     navigate(`/search?term=${inputValue.trim()}&searchType=${""}`);
   }
+
+  async function goRandom() {
+    const word = await fetch(
+      "https://random-word-api.herokuapp.com/word?number=1"
+    ).then((response) => response.json());
+
+    if (!word) {
+      return;
+    }
+    navigate(`/search?term=${word}&searchType=${""}`);
+  }
   return (
     <div className="row-span-4 col-span-1  ">
       <form
@@ -49,8 +60,8 @@ export default function Home() {
           <button onClick={goSearch} type="button" className="btn">
             Google Search
           </button>
-          <button type="button" className="btn">
-            I'm Feeling Lucky
+          <button onClick={() => goRandom()} type="button" className="btn">
+            I&apos;m Feeling Lucky
           </button>
         </div>
       </form>

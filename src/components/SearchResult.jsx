@@ -6,7 +6,7 @@ import ImageResults from "./ImageResults";
 
 export default function SearchResult() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchResult, setSearchResult] = useState({});
+  const [searchResult, setSearchResult] = useState(mockData);
   const term = searchParams.get("term");
   const searchType = searchParams.get("searchType");
   const startIndex = searchParams.get("start") || "1";
@@ -15,9 +15,9 @@ export default function SearchResult() {
     setSearchResult(result);
   };
 
-  useEffect(() => {
-    search();
-  }, [term, startIndex, searchType]);
+  // useEffect(() => {
+  //   search();
+  // }, [term, startIndex, searchType]);
 
   if (searchType === "image") {
     return <ImageResults searchResult={searchResult} />;
