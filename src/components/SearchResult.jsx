@@ -15,9 +15,9 @@ export default function SearchResult() {
     setSearchResult(result);
   };
 
-  // useEffect(() => {
-  //   search();
-  // }, [term, startIndex, searchType]);
+  useEffect(() => {
+    search();
+  }, [term, startIndex, searchType]);
 
   if (searchType === "image") {
     return <ImageResults searchResult={searchResult} />;
