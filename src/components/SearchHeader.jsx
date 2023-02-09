@@ -32,7 +32,7 @@ export default function SearchHeader() {
     });
   }
   return (
-    <header className="sticky top-0 bg-white">
+    <header className=" bg-white">
       <div className="flex w-full p-6 items-center">
         <img
           onClick={() => navigate("/")}
