@@ -3,10 +3,11 @@ import { useSearchParams } from "react-router-dom";
 import Parser from "html-react-parser";
 import mockData from "./mock";
 import ImageResults from "./ImageResults";
+import SearchMock from "./SearchMock";
 
 export default function SearchResult() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchResult, setSearchResult] = useState(mockData);
+  const [searchResult, setSearchResult] = useState(null);
   const term = searchParams.get("term");
   const searchType = searchParams.get("searchType");
   const startIndex = searchParams.get("start") || "1";
@@ -23,6 +24,9 @@ export default function SearchResult() {
     return <ImageResults searchResult={searchResult} />;
   }
 
+  if (searchType === "" && !searchResult) {
+    return <SearchMock />;
+  }
   return (
     <div className="row-start-2  w-full max-auto px-3 sm:pl-[5%] md:pl-[14%] lg:pl-52  h-full">
       <>
@@ -70,5 +74,8 @@ async function getDataFromGoogle(term, searchType, startIndex) {
     }&start=${startIndex}`
   );
   const result = await data.json();
+  if (result.status !== 200) {
+    return null;
+  }
   return result;
 }
