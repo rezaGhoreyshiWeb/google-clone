@@ -63,7 +63,7 @@ export default function SearchResult() {
                   </h2>
                 </a>
               </div>
-              <p className="text-gray-600 ">{result.snippet|| 'nist'}</p>
+              <p className="text-gray-600 ">{result.snippet}</p>
             </div>
           );
         })}
