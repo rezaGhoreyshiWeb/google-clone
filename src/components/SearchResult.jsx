@@ -13,7 +13,7 @@ export default function SearchResult() {
   const search = async function () {
     const result = await getDataFromGoogle(term, searchType, startIndex);
     setSearchResult(result);
-    console.log(result)
+    
   };
 
   useEffect(() => {
