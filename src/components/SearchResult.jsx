@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import Parser from "html-react-parser";
-import mockData from "./mock";
 import ImageResults from "./ImageResults";
 import SearchMock from "./SearchMock";
 import SearchImageMock from "./SearchImageMock";
@@ -10,11 +8,12 @@ export default function SearchResult() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchResult, setSearchResult] = useState(null);
   const term = searchParams.get("term");
-  const searchType = searchParams.get("searchType");
+  const searchType = searchParams.get("searchType") || '';
   const startIndex = searchParams.get("start") || "1";
   const search = async function () {
     const result = await getDataFromGoogle(term, searchType, startIndex);
     setSearchResult(result);
+    console.log(result)
   };
 
   useEffect(() => {
@@ -64,7 +63,7 @@ export default function SearchResult() {
                   </h2>
                 </a>
               </div>
-              <p className="text-gray-600 ">{Parser(result.htmlSnippet)}</p>
+              <p className="text-gray-600 ">{result.snippet|| 'nist'}</p>
             </div>
           );
         })}
@@ -80,6 +79,7 @@ async function getDataFromGoogle(term, searchType, startIndex) {
     }&start=${startIndex}`
   );
   const result = await data.json();
+ 
   if (300 < result.status > 200) {
     return null;
   }
