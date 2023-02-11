@@ -21,19 +21,17 @@ export default function SearchResult() {
     search();
   }, [term, startIndex, searchType]);
 
-  if(searchType === 'image' && !searchResult) {
-    return <SearchImageMock/>
+  if (searchType === "image" && !searchResult) {
+    return <SearchImageMock />;
   }
-  
+
   if (searchType === "image") {
     return <ImageResults searchResult={searchResult} />;
   }
 
-
   if (searchType === "" && !searchResult) {
     return <SearchMock />;
   }
-
 
   return (
     <div className="row-start-2  w-full max-auto px-3 sm:pl-[5%] md:pl-[14%] lg:pl-52  h-full">
@@ -82,7 +80,7 @@ async function getDataFromGoogle(term, searchType, startIndex) {
     }&start=${startIndex}`
   );
   const result = await data.json();
-  if (result.status !== 200) {
+  if (300 < result.status > 200) {
     return null;
   }
   return result;
